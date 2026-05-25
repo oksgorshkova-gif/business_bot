@@ -1,0 +1,30 @@
+services:
+  bot:
+    build: .
+    env_file:
+      - .env
+    environment:
+      DB_HOST: db
+      GOOGLE_SERVICE_ACCOUNT_FILE: /run/secrets/google-service-account.json
+      LOG_FILE: /app/logs/logs.txt
+    volumes:
+      - ./logs:/app/logs
+      - ${GOOGLE_SERVICE_ACCOUNT_FILE:-./google-service-account.json}:/run/secrets/google-service-account.json:ro
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: ${DB_NAME:-postgres}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
