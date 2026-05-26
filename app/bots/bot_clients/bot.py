@@ -333,7 +333,7 @@ async def handle_all(message: types.Message):
             print("ERROR:", e)
             await message.answer("Ошибка при работе с календарём")
             write_log(f"{datetime.now()} | USER {name_db} | {date_text} дал ошибку: {e}\n")
-            print('У {name_db} ошибка при работе с календарём:', e)
+            print(f'У {name_db} ошибка при работе с календарём: {e}')
 
         return
        
