@@ -4,6 +4,8 @@
 __pycache__/
 *.py[cod]
 venv/
+logs/
 logs.txt
 app/bots/**/logs.txt
 *.json
+.DS_Store
