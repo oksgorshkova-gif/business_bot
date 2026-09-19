@@ -21,7 +21,7 @@ async def back_handler(message: Message, state: FSMContext):
 async def process_report_type(message: Message, state: FSMContext):
     report_type = message.text
     try:
-        if report_type in ("Текущий месяц", "Следующий месяц"):
+        if "месяц" in report_type:
             period = get_period(report_type)
             profit = get_profit(period)
             expenses = get_expences(period)

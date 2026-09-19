@@ -57,7 +57,7 @@ class Booking:
         comment = []
 
         lines = text.strip().split("\n")
-        name = lines[0]
+        name = lines[0].strip() 
 
         raw_start = lines[1]
         if ":" not in raw_start:
@@ -78,7 +78,7 @@ class Booking:
         )
 
         price = int(lines[3])
-        comment = lines[4] if len(lines) > 4 else None
+        comment = lines[4].strip() if len(lines) > 4 else None
 
         # Проверка, что даты распарсились
         if not start_dt or not end_dt:
@@ -93,7 +93,7 @@ class Booking:
         """
         start_dt = None
         end_dt = None
-        price = 0
+        price = '0'
         name = "Unknown"
         comment = []
 
@@ -109,7 +109,9 @@ class Booking:
         if ":" in delta:
             hours, minutes = map(int, delta.split(":"))
         else:
-            hours, minutes = int(delta), 0
+            timing =float(delta.replace(",", ".")) * 60
+            hours = int(timing // 60)
+            minutes = int(timing % 60)
 
         actual_duration = timedelta(hours=hours, minutes=minutes)
         prep_time = timedelta(minutes=15)

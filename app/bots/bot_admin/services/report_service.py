@@ -56,6 +56,8 @@ def get_period(period):
         offset = 0
     elif period == "Следующий месяц":
         offset = 1
+    elif period == "Прошлый месяц":
+        offset = -1
     else:
         pass
 

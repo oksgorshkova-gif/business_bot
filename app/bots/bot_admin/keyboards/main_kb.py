@@ -8,12 +8,12 @@ from aiogram.types import FSInputFile, KeyboardButton
 def main_kb():
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="Забронировать")], # -> booking_kb()   
-            [KeyboardButton(text="Изменить бронирование")], # -> booking_update_kb
-            [KeyboardButton(text="Отчет")], # -> report_kb
+            [KeyboardButton(text="🛎️ Забронировать")], # -> booking_kb()   
+            [KeyboardButton(text="💰 Отчет")], # -> report_kb
             [KeyboardButton(text="Записать трату")], # -> expenses_kb
-            [KeyboardButton(text="Заготовленные ответы")], # -> reply_kb
-            [KeyboardButton(text="Обновить код")], # -> waiting_for_new_code = State()
+            [KeyboardButton(text="✍️ Заготовленные ответы")], # -> reply_kb
+            [KeyboardButton(text="🔢 Обновить код")], # -> waiting_for_new_code = State()
+            [KeyboardButton(text="Изменить бронирование")], # -> booking_update_kb
             [KeyboardButton(text="/start")],
         ],
         resize_keyboard=True, 
@@ -47,6 +47,7 @@ def booking_update_kb(): # waiting_update_booking_type
 def report_kb():
     return ReplyKeyboardMarkup(
         keyboard=[
+            [KeyboardButton(text="Прошлый месяц")], # state -> waiting_reply_report_kb
             [KeyboardButton(text="Текущий месяц")], # state -> waiting_reply_report_kb 
             [KeyboardButton(text="Следующий месяц")], # state -> waiting_reply_report_kb
             [KeyboardButton(text="Выбрать период")], # state -> waiting_custom_period
@@ -95,9 +96,7 @@ def reply_daily_kb():
     return ReplyKeyboardMarkup( 
         keyboard=[
             [KeyboardButton(text="Спасибо, оплачивайте")],
-            [KeyboardButton(text="Сколько вас")], 
             [KeyboardButton(text="День заезда")],
-            [KeyboardButton(text="День заезда без камеры")], 
             [KeyboardButton(text="Назад")], 
             ],
         resize_keyboard=True,

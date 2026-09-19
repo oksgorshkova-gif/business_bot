@@ -93,9 +93,9 @@ async def process_avito_text(message: Message, state: FSMContext):
             return
         await message.answer(f"✅ Обработка текста успешна\n\n")
         
-        cleaning_service(booking.start_datetime)
+        cleaning_service(start_datetime=booking.start_datetime)
         create_booking(booking)
-        cleaning_service(booking.end_datetime)
+        cleaning_service(end_datetime=booking.end_datetime)
 
         await message.answer(f"✅ Бронирование успешно создано\n\n")
         await message.answer(f"✅ Уборка добавлена\n\n")
