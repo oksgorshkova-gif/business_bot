@@ -17,15 +17,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+      
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
+      
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
-
+      
       - name: Compile sources
         run: python -m compileall main.py app
 
@@ -42,19 +42,15 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-
           if [ -z "$SSH_PRIVATE_KEY" ]; then
             echo "SERVER_SSH_KEY is not set"
             exit 1
           fi
-
           printf '%s' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-
           if [ -z "$SERVER_PORT" ]; then
             SERVER_PORT=22
           fi
-
           ssh-keyscan -H -p "$SERVER_PORT" "$SERVER_HOST" >> ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
 
@@ -68,7 +64,6 @@ jobs:
           if [ -z "$SERVER_PORT" ]; then
             SERVER_PORT=22
           fi
-
           ssh -i ~/.ssh/deploy_key \
             -o IdentitiesOnly=yes \
             -o StrictHostKeyChecking=yes \
