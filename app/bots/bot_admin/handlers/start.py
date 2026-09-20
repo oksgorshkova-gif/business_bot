@@ -45,22 +45,22 @@ async def main_menu_handler(message: Message, state: FSMContext):
 @router.message(MainMenuState.waiting_reply_main_kb)
 async def process_booking_type(message: Message, state: FSMContext):
     booking_type = message.text
-    if booking_type == "Забронировать":
+    if booking_type == "🛎️ Забронировать":
         await message.answer("Выбери тип бронирования:", reply_markup=main_kb.booking_kb())
         await state.set_state(BookingState.waiting_booking_type)  
     elif booking_type == "Изменить бронирование":
         await message.answer("Выбери тип изменения:", reply_markup=main_kb.booking_update_kb())
         await state.set_state(BookingState.waiting_update_booking_type)
-    elif booking_type == "Отчет":
+    elif booking_type == "💰 Отчет":
         await message.answer("Выбери тип отчета:", reply_markup=main_kb.report_kb())
         await state.set_state(ReportState.waiting_reply_report_kb)
     elif booking_type == "Записать трату":
         await message.answer("Выбери тип траты:", reply_markup=main_kb.expenses_type_kb())
         await state.set_state(ExpenseState.waiting_write_expenses_type)
-    elif booking_type == "Заготовленные ответы":
+    elif booking_type == "✍️ Заготовленные ответы":
         await message.answer("Выбери категорию заготовленных ответов:", reply_markup=main_kb.reply_kb())
         await state.set_state(MessageState.waiting_messages_reply_kb)
-    elif booking_type == "Обновить код":
+    elif booking_type == "🔢 Обновить код":
         await message.answer("Диктуй:")
         await state.set_state(KeyboxState.waiting_for_new_code)
     elif booking_type == "Обновить бот":
