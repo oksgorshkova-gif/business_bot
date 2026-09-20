@@ -30,10 +30,18 @@ ssh-keygen -t ed25519 -C "github-actions-business-bot" -f ~/.ssh/business_bot_de
 cat ~/.ssh/business_bot_deploy.pub
 ```
 
-Приватный ключ понадобится для GitHub secret:
+Приватный ключ понадобится для GitHub secret. Копируйте только содержимое файла, без лишних кавычек, пробелов и без `ssh-agent`-оберток:
 
 ```bash
 cat ~/.ssh/business_bot_deploy
+```
+
+Если ключ был скопирован из Windows или из редактора, его нужно сохранить в формате OpenSSH без `\r` в конце строк. GitHub secret должен содержать ровно блок:
+
+```text
+-----BEGIN OPENSSH PRIVATE KEY-----
+...
+-----END OPENSSH PRIVATE KEY-----
 ```
 
 ## 3. Добавить GitHub Secrets
