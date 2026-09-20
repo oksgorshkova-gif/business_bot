@@ -46,7 +46,7 @@ jobs:
             echo "SERVER_SSH_KEY is not set"
             exit 1
           fi
-          printf '%s' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/deploy_key
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           if [ -z "$SERVER_PORT" ]; then
             SERVER_PORT=22
