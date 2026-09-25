@@ -100,6 +100,13 @@ async def process_messages_hourly(message: Message, state: FSMContext):
             "Тогда при выезде её нужно будет включить обратно.\n\n" 
             "Хорошего отдыха! Мы на связи здесь и в телеграм @sibirskaya_perm"
         )
+    elif reply == "День выезда":
+        await message.answer(
+            "Доброе утро!\n"
+            "Как соберетесь, включите, пожалуйста, камеру и верните ключ в сейф.\n\n"
+            "Пароль 1992.\n\n"
+            "В течение дня приберемся и вернем залог. Куда его отправить?"
+        )
 
     elif reply == "Назад":
         await message.answer(

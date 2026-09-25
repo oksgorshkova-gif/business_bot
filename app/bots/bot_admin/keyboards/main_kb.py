@@ -98,6 +98,7 @@ def reply_daily_kb():
         keyboard=[
             [KeyboardButton(text="Спасибо, оплачивайте")],
             [KeyboardButton(text="День заезда")],
+            [KeyboardButton(text="День выезда")],
             [KeyboardButton(text="Назад")], 
             ],
         resize_keyboard=True,

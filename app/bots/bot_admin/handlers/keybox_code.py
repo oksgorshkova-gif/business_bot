@@ -22,6 +22,8 @@ async def text_handler(message: Message, state: FSMContext):
         new_code = message.text.strip()
         if not new_code.isdigit():
             raise ValueError("Код должен быть числом")
+        if len(new_code) != 4:
+            raise ValueError("Код должен состоять из 4 цифр")
     except Exception as e:
         await message.answer(f"❌ {e}")
         await state.set_state(KeyboxState.waiting_for_new_code)
