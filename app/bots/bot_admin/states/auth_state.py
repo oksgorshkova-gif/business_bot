@@ -21,6 +21,7 @@ class BookingState(StatesGroup):
 class ReportState(StatesGroup):
     waiting_reply_report_kb = State()
     waiting_custom_period = State()
+    future_income = State()
     preparing_report_current_month = State()
     preparing_report_previous_month = State()
     preparing_report = State()

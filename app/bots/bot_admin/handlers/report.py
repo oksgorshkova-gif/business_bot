@@ -1,5 +1,5 @@
 from app.bots.bot_admin.keyboards import main_kb
-from app.bots.bot_admin.services.report_service import get_profit, get_period, get_profit, get_range, get_expences
+from app.bots.bot_admin.services.report_service import get_future_income, get_profit, get_period, get_profit, get_range, get_expences
 from app.bots.bot_admin.states.auth_state import MainMenuState, ReportState
 from aiogram.fsm.context import FSMContext
 from aiogram import Router, F
@@ -72,3 +72,13 @@ async def process_custom_period(message: Message, state: FSMContext):
             )
     await state.set_state(MainMenuState.waiting_reply_main_kb)
 
+@router.message(ReportState.future_income)
+async def process_future_income(message: Message, state: FSMContext):
+    try:
+        result = get_future_income()
+        await message.answer(f"Будущий доход:\n{result}")
+    except Exception as e:
+        print(f"Ошибка при обработке запроса на будущий доход:\n{e}")
+        await message.answer(f"❌ {e}")
+        await state.set_state(ReportState.waiting_reply_report_kb)
+        return

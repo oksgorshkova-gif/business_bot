@@ -25,7 +25,47 @@ def get_profit(period):
     finally:
         cursor.close()
         conn.close()
-     
+
+def get_future_income():
+    conn = get_connection()
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute(
+            """
+            SELECT price, TO_CHAR(start_time, 'DD.MM.YYYY') 
+            FROM bookings
+            WHERE start_time > NOW() AND type = 'daily'
+            ORDER BY start_time ASC
+            """
+        )
+        
+        # Используем fetchall(), чтобы получить ВСЕ записи, а не только первую
+        rows = cursor.fetchall()
+        
+        total_income = 0
+        booking_details = []
+        n = 1
+        
+        for row in rows:
+            price = row[0] or 0  # Если цена None, считаем как 0
+            date_str = row[1]
+            
+            total_income += price
+            booking_details.append(f"{n}. {price} {date_str}")
+            n += 1
+            
+        # Формируем итоговый текст: первая строка общая сумма, далее детали
+        result_lines = [str(total_income)] + booking_details
+        return "\n".join(result_lines)
+        
+    except Exception as e:
+        print(f"Ошибка с базой данных:\n{e}")
+        raise e
+    finally:
+        cursor.close()
+        conn.close()
+
 def get_expences(period):
     date_start, date_end = period
     conn = get_connection()
