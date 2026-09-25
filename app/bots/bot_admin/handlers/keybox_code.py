@@ -20,10 +20,13 @@ dp = Dispatcher()
 async def text_handler(message: Message, state: FSMContext):
     try:
         new_code = message.text.strip()
-
-    except ValueError:
-        await message.answer("❌ Код должен быть числом")
+        if not new_code.isdigit():
+            raise ValueError("Код должен быть числом")
+    except Exception as e:
+        await message.answer(f"❌ {e}")
+        await state.set_state(KeyboxState.waiting_for_new_code)
         return
+    
     set_keybox_codes(new_code)
     await message.answer("✅ Код обновлен")
 
