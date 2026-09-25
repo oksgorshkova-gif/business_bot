@@ -51,7 +51,7 @@ def report_kb():
             [KeyboardButton(text="Текущий месяц")], # state -> waiting_reply_report_kb 
             [KeyboardButton(text="Следующий месяц")], # state -> waiting_reply_report_kb
             [KeyboardButton(text="Выбрать период")], # state -> waiting_custom_period
-            [KeyboardButton(text="Будуший доход")], # state -> future_income
+            [KeyboardButton(text="Будущий доход")], # state -> future_income
             [KeyboardButton(text="Назад")], # state -> waiting_reply_main_kb
             ],
         resize_keyboard=True,

@@ -39,6 +39,10 @@ async def process_report_type(message: Message, state: FSMContext):
                 reply_markup=main_kb.main_kb(),
             )
             await state.set_state(MainMenuState.waiting_reply_main_kb)
+        elif report_type.strip() == "Будущий доход":
+            result = get_future_income()
+            await message.answer(f"Будущий доход:\n{result}")
+            await state.set_state(ReportState.waiting_reply_report_kb)
         else:
             await message.answer("Некорректный тип отчета.")
 
@@ -72,13 +76,3 @@ async def process_custom_period(message: Message, state: FSMContext):
             )
     await state.set_state(MainMenuState.waiting_reply_main_kb)
 
-@router.message(ReportState.future_income)
-async def process_future_income(message: Message, state: FSMContext):
-    try:
-        result = get_future_income()
-        await message.answer(f"Будущий доход:\n{result}")
-    except Exception as e:
-        print(f"Ошибка при обработке запроса на будущий доход:\n{e}")
-        await message.answer(f"❌ {e}")
-        await state.set_state(ReportState.waiting_reply_report_kb)
-        return
