@@ -104,7 +104,7 @@ async def process_messages_hourly(message: Message, state: FSMContext):
         await message.answer(
             "Доброе утро!\n"
             "Как соберетесь, включите, пожалуйста, камеру и верните ключ в сейф.\n\n"
-            "Пароль 1992.\n\n"
+            "Пароль {code}.\n\n"
             "В течение дня приберемся и вернем залог. Куда его отправить?"
         )
 
